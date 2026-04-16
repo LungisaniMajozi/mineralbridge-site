@@ -30,14 +30,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState(null);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     setIsOpen(false);
@@ -50,25 +43,21 @@ export default function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
-        scrolled
-          ? "bg-white/95 shadow-md border-gray-100"
-          : "bg-white/90 border-gray-100"
-      } backdrop-blur-md`}
-    >
-      {/* Top Accent Line (Optional - matches gold theme) */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500" />
+    <nav className="fixed top-0 w-full z-50 bg-white shadow-md border-b border-gray-100">
+      {/* Top Gold Accent Line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24">
-          {/* Logo - Bigger Size */}
+        {/* Increased height with padding to fit large logo */}
+        <div className="flex justify-between items-center h-24 lg:h-28">
+          {/* LARGE LOGO */}
           <Link to="/" className="flex items-center z-10">
             <motion.img
               whileHover={{ scale: 1.02 }}
               src="/logo.png"
               alt="MineralBridge Africa"
-              className="h-16 md:h-22 w-auto object-contain"
+              // Increased size: h-16 (64px) on mobile, h-20 (80px) on desktop
+              className="h-16 md:h-20 w-auto object-contain drop-shadow-md"
             />
           </Link>
 
@@ -77,7 +66,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <div
                 key={link.name}
-                className="relative group"
+                className="relative"
                 onMouseEnter={() =>
                   link.dropdown && setActiveDropdown(link.name)
                 }
@@ -85,7 +74,7 @@ export default function Navbar() {
               >
                 <Link
                   to={link.href}
-                  className={`flex items-center gap-1 text-base font-medium transition-colors py-2 ${
+                  className={`flex items-center gap-1 text-base font-semibold transition-colors py-2 ${
                     activeDropdown === link.name
                       ? "text-amber-600"
                       : "text-slate-700 hover:text-amber-600"
@@ -142,7 +131,7 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* CTA Button - Orange */}
+            {/* CTA Button */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 to="/contact"
@@ -160,47 +149,19 @@ export default function Navbar() {
             className="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition z-10"
             aria-label="Toggle menu"
           >
-            <AnimatePresence mode="wait" initial={false}>
-              {isOpen ? (
-                <motion.svg
-                  key="close"
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.2 }}
-                  className="w-7 h-7"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </motion.svg>
-              ) : (
-                <motion.svg
-                  key="menu"
-                  initial={{ opacity: 0, rotate: 90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: -90 }}
-                  transition={{ duration: 0.2 }}
-                  className="w-7 h-7"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </motion.svg>
-              )}
-            </AnimatePresence>
+            <svg
+              className="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
           </motion.button>
         </div>
       </div>
@@ -212,10 +173,9 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden overflow-hidden bg-white border-t border-gray-100 relative"
+            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
           >
-            <div className="px-6 py-6 space-y-4 relative z-10">
+            <div className="px-6 py-6 space-y-4">
               {navLinks.map((link) => (
                 <div
                   key={link.name}
@@ -225,26 +185,20 @@ export default function Navbar() {
                     <Link
                       to={link.href}
                       onClick={() => !link.dropdown && setIsOpen(false)}
-                      className={`text-lg font-medium ${
-                        link.dropdown ? "text-slate-900" : "text-slate-700"
-                      }`}
+                      className="text-lg font-semibold text-slate-800"
                     >
                       {link.name}
                     </Link>
                     {link.dropdown && (
-                      <motion.button
-                        whileTap={{ scale: 0.95 }}
+                      <button
                         onClick={() => toggleMobileDropdown(link.name)}
                         className="p-2 text-slate-500"
                       >
-                        <motion.svg
+                        <svg
                           className="w-5 h-5"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
-                          animate={{
-                            rotate: mobileOpenDropdown === link.name ? 180 : 0,
-                          }}
                         >
                           <path
                             strokeLinecap="round"
@@ -252,37 +206,33 @@ export default function Navbar() {
                             strokeWidth={2}
                             d="M19 9l-7 7-7-7"
                           />
-                        </motion.svg>
-                      </motion.button>
+                        </svg>
+                      </button>
                     )}
                   </div>
-
                   <AnimatePresence>
                     {link.dropdown && mobileOpenDropdown === link.name && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden mt-2"
+                        initial={{ height: 0 }}
+                        animate={{ height: "auto" }}
+                        exit={{ height: 0 }}
+                        className="overflow-hidden mt-2 pl-4 space-y-3"
                       >
-                        <div className="pl-4 space-y-3 pb-2">
-                          {link.dropdown.map((item) => (
-                            <Link
-                              key={item.name}
-                              to={item.href}
-                              onClick={() => setIsOpen(false)}
-                              className="block text-sm text-slate-500 hover:text-amber-600"
-                            >
-                              {item.name}
-                            </Link>
-                          ))}
-                        </div>
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className="block text-sm text-slate-500 hover:text-amber-600"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
               ))}
-
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
