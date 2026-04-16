@@ -8,8 +8,7 @@ const navLinks = [
     name: "Who We Are",
     dropdown: [
       { name: "About Us", href: "/about" },
-      { name: "Leadership", href: "/leadership" },
-      { name: "Social Impact", href: "/social-impact" },
+      { name: "Why Choose Us", href: "/why-us" },
     ],
   },
   {
