@@ -53,7 +53,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center z-10">
             <motion.img
               whileHover={{ scale: 1.02 }}
-              src="/logo.png"
+              src="/logo1.png"
               alt="MineralBridge Africa"
               // Increased size: h-16 (64px) on mobile, h-20 (80px) on desktop
               className="h-16 md:h-20 w-auto object-contain drop-shadow-md"
