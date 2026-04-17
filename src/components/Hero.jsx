@@ -99,8 +99,8 @@ export default function Hero() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Content Container */}
-      <div className="relative z-20 min-h-screen flex flex-col justify-center px-6 py-20">
+      {/* Content Container - Added pt-32 for navbar spacing */}
+      <div className="relative z-20 min-h-screen flex flex-col justify-center px-6 py-20 pt-32 lg:pt-40">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Text Content */}

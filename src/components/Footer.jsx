@@ -8,9 +8,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <img
-              src="/logo.png"
+              src="/logo1.png"
               alt="MineralBridge Africa"
-              className="h-10 w-auto mb-4 brightness-200"
+              className="h-16 w-auto mb-4 brightness-200"
             />
             <p className="text-gray-400 text-sm leading-relaxed">
               Mitigating Risk, Combating Fraud, Delivering Trust. Expert

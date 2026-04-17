@@ -42,26 +42,23 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white shadow-md border-b border-gray-100">
-      {/* Top Gold Accent Line */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600" />
-
+    <nav className="fixed top-0 w-full z-50 bg-slate-900/95 backdrop-blur-md border-b border-amber-500/20 shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Increased height with padding to fit large logo */}
-        <div className="flex justify-between items-center h-24 lg:h-28">
-          {/* LARGE LOGO */}
+        {/* Flexible height container that adjusts to logo */}
+        <div className="flex justify-between items-center py-4 lg:py-6">
+          {/* EXTRA LARGE LOGO */}
           <Link to="/" className="flex items-center z-10">
             <motion.img
               whileHover={{ scale: 1.02 }}
               src="/logo1.png"
               alt="MineralBridge Africa"
-              // Increased size: h-16 (64px) on mobile, h-20 (80px) on desktop
-              className="h-16 md:h-20 w-auto object-contain drop-shadow-md"
+              // Much bigger: h-20 (80px) on mobile, h-24 (96px) on desktop
+              className="h-20 md:h-24 lg:h-28 w-auto object-contain drop-shadow-lg"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <div
                 key={link.name}
@@ -73,10 +70,10 @@ export default function Navbar() {
               >
                 <Link
                   to={link.href}
-                  className={`flex items-center gap-1 text-base font-semibold transition-colors py-2 ${
+                  className={`flex items-center gap-1 px-4 py-2 text-base font-semibold transition-all rounded-lg ${
                     activeDropdown === link.name
-                      ? "text-amber-600"
-                      : "text-slate-700 hover:text-amber-600"
+                      ? "text-amber-400 bg-amber-500/10"
+                      : "text-gray-300 hover:text-amber-400 hover:bg-white/5"
                   }`}
                 >
                   <span>{link.name}</span>
@@ -107,7 +104,7 @@ export default function Navbar() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 py-3 overflow-hidden z-50"
+                      className="absolute top-full left-0 mt-2 w-64 bg-slate-800 rounded-xl shadow-2xl border border-amber-500/20 py-3 overflow-hidden z-50"
                     >
                       {link.dropdown.map((item, idx) => (
                         <motion.div
@@ -118,7 +115,7 @@ export default function Navbar() {
                         >
                           <Link
                             to={item.href}
-                            className="block px-5 py-2.5 text-sm text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-all border-l-2 border-transparent hover:border-amber-500"
+                            className="block px-5 py-2.5 text-sm text-gray-300 hover:bg-amber-500/10 hover:text-amber-400 transition-all border-l-2 border-transparent hover:border-amber-500"
                           >
                             {item.name}
                           </Link>
@@ -130,11 +127,11 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* CTA Button */}
+            {/* CTA Button - Bright Orange */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 to="/contact"
-                className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-3.5 rounded-lg text-sm font-bold shadow-lg hover:shadow-amber-500/30 transition-all"
+                className="ml-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-3.5 rounded-lg text-sm font-bold shadow-lg hover:shadow-amber-500/30 transition-all border border-amber-400/20"
               >
                 How can I help you?
               </Link>
@@ -145,7 +142,7 @@ export default function Navbar() {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition z-10"
+            className="lg:hidden p-2 rounded-lg text-amber-400 hover:bg-amber-500/10 transition z-10"
             aria-label="Toggle menu"
           >
             <svg
@@ -172,26 +169,26 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
+            className="lg:hidden overflow-hidden bg-slate-800 border-t border-amber-500/20"
           >
             <div className="px-6 py-6 space-y-4">
               {navLinks.map((link) => (
                 <div
                   key={link.name}
-                  className="border-b border-gray-50 last:border-0 pb-2"
+                  className="border-b border-gray-700 last:border-0 pb-2"
                 >
                   <div className="flex justify-between items-center">
                     <Link
                       to={link.href}
                       onClick={() => !link.dropdown && setIsOpen(false)}
-                      className="text-lg font-semibold text-slate-800"
+                      className="text-lg font-semibold text-gray-200 hover:text-amber-400"
                     >
                       {link.name}
                     </Link>
                     {link.dropdown && (
                       <button
                         onClick={() => toggleMobileDropdown(link.name)}
-                        className="p-2 text-slate-500"
+                        className="p-2 text-amber-400"
                       >
                         <svg
                           className="w-5 h-5"
@@ -222,7 +219,7 @@ export default function Navbar() {
                             key={item.name}
                             to={item.href}
                             onClick={() => setIsOpen(false)}
-                            className="block text-sm text-slate-500 hover:text-amber-600"
+                            className="block text-sm text-gray-400 hover:text-amber-400"
                           >
                             {item.name}
                           </Link>
