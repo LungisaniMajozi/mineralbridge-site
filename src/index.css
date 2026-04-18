@@ -129,22 +129,15 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Body Styles - Using raw CSS values instead of @apply for custom colors */
+/* Body Styles */
 body {
-  background-color: #0a0a0f; /* premium-dark */
-  color: #ffffff;
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
+  background-color: #091123; /* Deep navy blue */
+  color: #f8fafc; /* slate-50 */
   -webkit-font-smoothing: antialiased;
-  background-image:
-    radial-gradient(ellipse at top, rgba(180, 83, 9, 0.1) 0%, transparent 50%),
-    radial-gradient(
-      ellipse at bottom,
-      rgba(245, 158, 11, 0.05) 0%,
-      transparent 50%
-    );
+  background-image: 
+    radial-gradient(ellipse at top right, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse at bottom left, rgba(180, 83, 9, 0.03) 0%, transparent 40%);
+  min-height: 100vh;
 }
 
 /* Keyframes for animations */
